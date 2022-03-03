@@ -26,7 +26,6 @@ const mutations = {
      * Removes all todo items to state
      * 
      * @param {*} state 
-     * @param {*} obj 
      */
     [MUTATE_REMOVE_ALL_TODO](state) {  
         state.todo.splice(0, state.todo.length);
@@ -36,7 +35,7 @@ const mutations = {
      * Adds category to todo item
      * 
      * @param {*} state 
-     * @param {*} num 
+     * @param {*} category 
      */
     [MUTATE_ADD_CATEGORY](state, category) {  
         state.category = category;

@@ -5,6 +5,7 @@ import { MUTATE_TODO, MUTATE_REMOVE_TODO, MUTATE_REMOVE_ALL_TODO, MUTATE_ADD_CAT
 * Adding todo item
  * 
  * @param {state} commit 
+ * @param {*} payload 
 */
 export async function AssignTodo({ commit }, payload) {
     try {	   
@@ -18,6 +19,7 @@ export async function AssignTodo({ commit }, payload) {
 * Removing todo item
  * 
  * @param {state} commit 
+ * @param {*} payload 
 */
 export async function AssignRemoveTodo({ commit }, payload) {
     try {	   
@@ -44,6 +46,7 @@ export async function AssignRemoveAllTodo({ commit }) {
 * Sets task category
  * 
  * @param {state} commit 
+ * @param {*} payload 
 */
 export async function AssignAddCategory({ commit }, payload) {
     try {	   

@@ -1,5 +1,6 @@
 <template>
   <div class="priorities-list">
+    <span>Select priority</span>
     <div v-for="(item, index) in indicators" 
       :key="index" 
       @click="setCategory(index + 1)"
@@ -71,13 +72,14 @@ export default {
 .priorities-list {
     display: flex;
     flex-flow: row;
-    justify-content: center;
-    padding: 20px;
+    justify-content: start;
+    padding: 20px 0;
+    align-items: center;
 }
   .indicator {
     margin: 0 20px;
     display: flex;
-    border: #ccc 1px solid;
+    border: #ccc 2px solid;
     border-radius: 2em;
     padding: 6px 10px;
     align-items: center;
@@ -86,7 +88,7 @@ export default {
   }
 
   .indicator.active {
-    border: orange 1px solid;
+    border: #0093ea 2px solid;
   }
 
   .indicator.life-changing.span {

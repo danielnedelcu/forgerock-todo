@@ -10,7 +10,6 @@ const mutations = {
      */
     [MUTATE_TODO](state, obj) {    
         state.todo.push(obj);
-        console.log("MUTATE_TODO", state)
      },
 
     /**

@@ -6,11 +6,11 @@
           <priorities-list />
           <div v-if="todoList.length"  class="sort-container flex">
             <span>Sort by</span>
-            <select v-model="sortSelection">
+            <select v-model="sortSelection" @change="onChange($event)">
               <option disabled value="">Please select one</option>
-              <option>Life changing</option>
-              <option>Important</option>
-              <option>Meh</option>
+              <option value="1">Life changing</option>
+              <option value="2">Important</option>
+              <option value="3">Meh</option>
             </select>
           </div>
           <task-list />
@@ -26,7 +26,7 @@
 
 <script>
 import { ASSIGN_REMOVE_ALL_TODO }  from "../constants/actions.type";
-import { GETTER_TODO}  from "../constants/getters.type";
+import { GETTER_TODO, GETTER_BY_CATEGORY }  from "../constants/getters.type";
 import { mapActions, mapGetters } from 'vuex';
 import AddTask from '../components/AddTask';
 import TaskList from '../components/TaskList';
@@ -45,27 +45,16 @@ export default {
   data () {
     return {
       search: '',
-      sortSelection: 'Ascending',
+      sortSelection: '',
       isFirstLoad: true
     }
   },
 
   computed: {
       ...mapGetters ({
-          todoList : 'todoStore/' + GETTER_TODO
+          todoList : 'todoStore/' + GETTER_TODO,
+          byCategory: 'todoStore/' + GETTER_BY_CATEGORY
       }),
-
-      // updatedCoinList() {
-      //   let tempCoinList = this.coinList;
-
-      //   return tempCoinList.sort((a,b) => {
-      //       let x = a.market_cap_rank;
-      //       let y = b.market_cap_rank;
-
-      //       if(this.sortSelection === "Ascending") return x < y ? -1 : x > y ? 1 : 0
-      //         else return x > y ? -1 : x < y ? 1 : 0;
-      //   });
-      // }
   },   
   
   mounted() {
@@ -75,6 +64,10 @@ export default {
     ...mapActions( {
         removeAll: 'todoStore/' + ASSIGN_REMOVE_ALL_TODO
     }), 
+
+    onChange(e) {
+      this.byCategory(e.target.value);
+    },
 
     onClearList () {
       if(this.todoList.length) {

@@ -14,33 +14,29 @@ import { GETTER_CATEGORY }  from "../constants/getters.type";
 import { ASSIGN_REMOVE_TODO }  from "../constants/actions.type";
 
 export default {
-    name: 'coin-item',
-    store,
-    props : {
-        task : { type : Object, required : true }
-    },
+  name: 'coin-item',
+  store,
+  props : {
+      task : { type : Object, required : true }
+  },
 
-    data () {
-      return {
-      }
-    },
-    
-    computed: {
-      ...mapGetters ({
-          category : 'todoStore/' + GETTER_CATEGORY
-      }),
+  data () {
+    return {
+    }
+  },
+  
+  computed: {
+    ...mapGetters ({
+        category : 'todoStore/' + GETTER_CATEGORY
+    }),
 
-      getCategoryType () {
-        if(this.task.category === 1) return 'life-changing';
-        if(this.task.category === 2) return 'important';
-        if(this.task.category === 3) return 'meh';
-        return 'life-changing';
-      }
-    },
-
-    mounted() {
-      console.log("mounted", this.task);
-    },
+    getCategoryType () {
+      if(this.task.category === 1) return 'life-changing';
+      if(this.task.category === 2) return 'important';
+      if(this.task.category === 3) return 'meh';
+      return 'life-changing';
+    }
+  },
 
   methods: {
     ...mapActions( {

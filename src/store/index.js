@@ -1,14 +1,10 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import todoStore from "./todoStore";
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    todoStore
+  },
+  plugins: [createPersistedState()]
+});

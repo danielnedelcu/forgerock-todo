@@ -1,5 +1,9 @@
 # challenge
+Todo application with categorization.
 
+Github code repo: https://github.com/danielnedelcu/forgerock-todo
+
+Direct link: https://6220070641909fa2fb62824d--hardcore-meitner-5b6b93.netlify.app/
 ## Project setup
 ```
 yarn install

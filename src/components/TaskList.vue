@@ -1,9 +1,9 @@
 <template>
     <div class="task-list" > 
       <template v-if="todoList.length">
-          <todo-item v-for="(item, i) in todoList" 
-            :key="i" 
-            :task="item" 
+          <todo-item v-for="item in todoList" 
+            :key="item.id" 
+            :data="item" 
             v-bind:class="{ complete: item.complete }"
 
           />

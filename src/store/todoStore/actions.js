@@ -1,4 +1,4 @@
-import { MUTATE_TODO, MUTATE_REMOVE_TODO, MUTATE_REMOVE_ALL_TODO, MUTATE_ADD_CATEGORY } from "../../constants/mutations.type";
+import { MUTATE_TODO, MUTATE_REMOVE_TODO, MUTATE_REMOVE_ALL_TODO, MUTATE_ADD_CATEGORY, MUTATE_UPDATE_TODO } from "../../constants/mutations.type";
 
 
 /**
@@ -12,6 +12,20 @@ export async function AssignTodo({ commit }, payload) {
         commit(MUTATE_TODO, payload);
     } catch (e) {
         console.log("Add todo item fail")
+    }    
+}
+
+/**
+* Updating todo item
+ * 
+ * @param {state} commit 
+ * @param {*} payload 
+*/
+export async function AssignUpdateTodo({ commit }, payload) {
+    try {	   
+        commit(MUTATE_UPDATE_TODO, payload);
+    } catch (e) {
+        console.log("Update todo item fail")
     }    
 }
 

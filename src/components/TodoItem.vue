@@ -1,9 +1,10 @@
 <template>
     <div class="todo-item" v-bind:class="getCategoryType">
-      <div v-on:click="toggleCompleteState(task)" class="task-name">
-        {{ task.task }} 
+      <div v-show="!editing" v-on:click="enableEdit(data)" class="task-name">
+        {{ data.task }} 
       </div>
-      <button v-on:click="removeTodoItem(task)" class="close"/>
+      <input v-show="editing" @blur.prevent="stopEditing(data)" v-model="taskEditable" ref="inputField"/>
+      <button v-on:click="removeTodoItem(data)" class="close"/>
     </div>
 </template>
 
@@ -11,17 +12,19 @@
 import  store from '../store/index'
 import { mapActions, mapGetters } from 'vuex';
 import { GETTER_CATEGORY }  from "../constants/getters.type";
-import { ASSIGN_REMOVE_TODO }  from "../constants/actions.type";
+import { ASSIGN_REMOVE_TODO, ASSIGN_UPDATE_TODO }  from "../constants/actions.type";
 
 export default {
   name: 'coin-item',
   store,
   props : {
-      task : { type : Object, required : true }
+      data : { type : Object, required : true }
   },
 
   data () {
     return {
+      editing: false,
+      taskEditable: ''
     }
   },
   
@@ -31,20 +34,34 @@ export default {
     }),
 
     getCategoryType () {
-      if(this.task.category === 1) return 'life-changing';
-      if(this.task.category === 2) return 'important';
-      if(this.task.category === 3) return 'meh';
+      if(this.data.category === 1) return 'life-changing';
+      if(this.data.category === 2) return 'important';
+      if(this.data.category === 3) return 'meh';
       return 'life-changing';
     }
   },
 
   methods: {
     ...mapActions( {
-          removeTodo: 'todoStore/' + ASSIGN_REMOVE_TODO
+          removeTodo: 'todoStore/' + ASSIGN_REMOVE_TODO,
+          updateTodo: 'todoStore/' + ASSIGN_UPDATE_TODO
       }), 
 
-    toggleCompleteState (td) {
-      td.complete = !td.complete;
+    enableEdit () {
+      this.editing = true;
+      this.$nextTick(() => {
+        this.$refs.inputField.focus();
+      });
+
+    },
+
+    stopEditing (td) {
+      if(this.taskEditable !== '') {
+        const obj = {id: td.id, value: this.taskEditable};
+        this.updateTodo(obj);
+      }
+
+      this.editing = false;
     },
 
     removeTodoItem (td) {
@@ -57,6 +74,16 @@ export default {
 <style scoped>
   .task-name {
     cursor: pointer;
+    line-height: 2;
+    font-size: 20px;
+  }
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    line-height: 2;
+    font-size: 20px;
+    padding: 0;
   }
   .todo-item {
     display: flex;

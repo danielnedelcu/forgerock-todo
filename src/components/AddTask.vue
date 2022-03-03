@@ -27,8 +27,12 @@ export default {
           setTodo: 'todoStore/' + ASSIGN_TODO
       }), 
 
+      getUniqueKey() {
+        return Math.random().toString(36).substr(2, 9);
+      },
+
       addTodo() {
-        if(this.task) this.setTodo({task: this.task, complete: false, category: this.category});
+        if(this.task) this.setTodo({id:this.getUniqueKey(), task: this.task, complete: false, category: this.category});
         this.task ='';
       }
   }

@@ -1,4 +1,4 @@
-import { MUTATE_TODO, MUTATE_REMOVE_TODO, MUTATE_REMOVE_ALL_TODO, MUTATE_ADD_CATEGORY } from "../../constants/mutations.type";
+import { MUTATE_TODO, MUTATE_REMOVE_TODO, MUTATE_REMOVE_ALL_TODO, MUTATE_ADD_CATEGORY, MUTATE_UPDATE_TODO } from "../../constants/mutations.type";
 
 const mutations = {
 
@@ -39,6 +39,17 @@ const mutations = {
      */
     [MUTATE_ADD_CATEGORY](state, category) {  
         state.category = category;
+     },
+
+    /**
+     * Updates todo item
+     * 
+     * @param {*} state 
+     * @param {*} obj 
+     */
+    [MUTATE_UPDATE_TODO](state, obj) {  
+        const find = state.todo.findIndex(x => x.id === obj.id)
+        state.todo[find].task = obj.value;
      }
 }
 
